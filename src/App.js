@@ -8,6 +8,8 @@ import { ObjStateComp } from './Components/ObjStateComp';
 import PropComp from './Components/PropComp';
 import { createContext } from 'react';
 import ContextCompA from './Components/ContextCompA';
+import FuncLC from './Components/FuncLC';
+import ApiComp from './Components/ApiComp';
 
 
 const number=28;
@@ -16,9 +18,11 @@ const array=[" S1mple"," Shroud"," Doc"];
 export const messageContext = createContext(null);
 function App() {
 
+  const [mount,setMount] = useState(true);
+  
   // Backdropping sending data back from component to app.js
   //  const [dataFromChild,setdata]=useState(null);
-
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -36,10 +40,14 @@ function App() {
          This is passed in App.js inside PropComp tags           
         </PropComp> */}
         {/* <h1>{dataFromChild}</h1> */}
-        <messageContext.Provider value={"Sending data from APP.js as a context"}>
+        {/* <messageContext.Provider value={"Sending data from APP.js as a context"}>
           <ContextCompA />
-        </messageContext.Provider>
+        </messageContext.Provider> */}
 
+        {/* <button onClick={()=> setMount(!mount)}>Mount/Unmount</button>
+        {mount && <FuncLC />} */}
+
+        <ApiComp />
       </header>
     </div>
   );
