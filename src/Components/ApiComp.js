@@ -1,34 +1,38 @@
-import React, { useState,useEffect } from 'react'
-import Button from 'react-bootstrap/Button';
+import React, { useState,useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Item from './Item';
 
 
 function ApiComp() {
+  const [filter,setFilter] = useState("products");  
   const [apiData,setApiData]=useState([]);
 
   const fetchData = async () => {
     // debugger;
-    const res = await fetch('https://dummyjson.com/products')
+    const res = await fetch(`https://dummyjson.com/${filter}`)
         const data = await res.json();
-        setApiData(data.products);
+        setApiData(filter === "products" ? data.products : data.users);
   }
   
   // cannot use async or return a promise from useEffect
   useEffect(() => {
+    setApiData([]);
     fetchData();
       
-  }, [])
+  }, [filter])
   
   console.log(apiData);
   return (
     <div>
- 
-     <div>
-      <div className='fs-3'>ApiComp</div>
+       <div className='d-flex justify-content-center'>  
+         <Button variant='secondary me-5' onClick={()=>setFilter("products")}>Products</Button>
+         <Button variant='warning' onClick={()=>setFilter("users")}>Users</Button>
+       </div>  
+      <div className='fs-2'>ApiComp</div>
        <div className='mt-3 d-flex flex-wrap justify-content-around'>
         {apiData.length === 0 ? (
-            <div className='d-flex'>
+            <div className='d-flex justify-content-center'>
             <Spinner animation="grow" variant="danger" />
             <Spinner animation="grow" variant="warning" />
             <Spinner animation="grow" variant="info" />
@@ -36,32 +40,15 @@ function ApiComp() {
             <Spinner animation="grow" variant="dark" />
             </div>
         ):(
-            apiData.map((product,index)=> (
+            apiData.map((elem,index)=> (
                  <div className='my-3' key={index}>
-                    <Card style={{ width: '18rem' , height:"30rem"}}>
-                {/* //used chaining operator to perform a check before assigning data */}
-                    <Card.Img variant="top" src={product?.thumbnail} height="180" />
-                        <Card.Body>
-                        <Card.Title>{product?.title +" "+ product?.brand}</Card.Title>
-                        <Card.Text>
-                            {product?.description.slice(0,20)+" ..."}
-                        </Card.Text>
-                        <Card.Text>
-                            <b className='fs-5'>{product?.category}</b>
-                        </Card.Text>
-                        <Card.Text>
-                            {product?.price}
-                        </Card.Text>
-                        <Button variant="primary">Buy Now</Button>
-                        </Card.Body>
-                    </Card>                
+                    <Item elem={elem}/>                
                 </div>
-            ))
-        ) }    
-    </div>
-    </div>         
+              ))
+            )}    
+        </div>       
     </div>
 )
 }
 
-export default ApiComp
+export default ApiComp;

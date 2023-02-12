@@ -10,7 +10,9 @@ import { createContext } from 'react';
 import ContextCompA from './Components/ContextCompA';
 import FuncLC from './Components/FuncLC';
 import ApiComp from './Components/ApiComp';
-
+import FormComp from './Components/FormComp';
+import { Form } from 'react-bootstrap';
+import ThemeToggle from './Components/ThemeToggle';
 
 const number=28;
 const array=[" S1mple"," Shroud"," Doc"];
@@ -48,6 +50,8 @@ function App() {
         {mount && <FuncLC />} */}
 
         <ApiComp />
+        {/* <FormComp /> */}
+        {/* <ThemeToggle /> */}
       </header>
     </div>
   );
