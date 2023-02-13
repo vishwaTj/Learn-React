@@ -13,6 +13,9 @@ import ApiComp from './Components/ApiComp';
 import FormComp from './Components/FormComp';
 import { Form } from 'react-bootstrap';
 import ThemeToggle from './Components/ThemeToggle';
+import UseReducerHooks from './Advanced Hooks/UseReducerHooks';
+import UseMemoHook from './Advanced Hooks/UseMemoHook';
+import { UseCallBackHook } from './Advanced Hooks/UseCallBackHook';
 
 const number=28;
 const array=[" S1mple"," Shroud"," Doc"];
@@ -49,9 +52,12 @@ function App() {
         {/* <button onClick={()=> setMount(!mount)}>Mount/Unmount</button>
         {mount && <FuncLC />} */}
 
-        <ApiComp />
+        {/* <ApiComp /> */}
         {/* <FormComp /> */}
         {/* <ThemeToggle /> */}
+        {/* <UseReducerHooks/> */}
+        {/* <UseMemoHook/> */}
+        <UseCallBackHook/>
       </header>
     </div>
   );
